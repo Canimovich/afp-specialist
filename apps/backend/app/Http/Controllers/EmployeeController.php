@@ -31,7 +31,7 @@ class EmployeeController extends Controller
         try {
 
             $validatedData = $request->validate([
-                'email' => 'required|email|max:50|unique:employees,email',
+                'email' => 'required|email|max:50|unique:employees',
                 'last_name' => 'required|string|max:100',
                 'first_name' => 'required|string|max:100',
                 'gender' => 'nullable|string|max:10',
@@ -57,8 +57,8 @@ class EmployeeController extends Controller
     public function show(string $id)
     {
         try {
-            $employees = Employee::all();
-            return response()->json($employees);
+            $employees = Employee::FindOrFail($id);
+            return response()->json($employees, 200);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'An error occurred while fetching employee.',
@@ -74,8 +74,20 @@ class EmployeeController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $employees = Employee::all();
-            return response()->json($employees);
+            $employees = Employee::FindOrFail($id);
+
+            $validatedData = $request->validate([
+                'email' => 'required|email|max:50|unique:employees,email',
+                'last_name' => 'required|string|max:100',
+                'first_name' => 'required|string|max:100',
+                'gender' => 'nullable|string|max:10',
+                'birthday' => 'nullable|date',
+                'date_hired' => 'required|date',
+                'salary' => 'nullable|numeric'
+            ]);
+
+            $employees->update($validatedData);
+            return response()->json($employees, 200);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'An error occurred while updating employee.',
@@ -91,8 +103,12 @@ class EmployeeController extends Controller
     public function destroy(string $id)
     {
         try {
-            $employees = Employee::all();
-            return response()->json($employees);
+            $employees = Employee::FindOrFail($id);
+            $employees->delete();
+            return response()->json([
+                'message' => 'Employee deleted successfully.',
+                'employee_id' => $id
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'An error occurred while deleting employee.',
