@@ -14,7 +14,12 @@ class EmployeeController extends Controller
     {
         try {
             $employees = Employee::all();
-            return response()->json($employees);
+            $response = [
+                'success' => true,
+                'data' => $employees,
+                'message' => 'Employees fetched successfully.'
+            ];
+            return response()->json($response, 200);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'An error occurred while fetching employees.',
@@ -41,8 +46,13 @@ class EmployeeController extends Controller
             ]);
 
             $employee = Employee::create($validatedData);
+            $response = [
+                'success' => true,
+                'data' => $employee,
+                'message' => 'Employee created successfully.'
+            ];
 
-            return response()->json($employee, 201);
+            return response()->json($response, 201);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'An error occurred while saving the data of employee.',
