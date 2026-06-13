@@ -1,4 +1,5 @@
 import type { Pensioner, ApiResponse } from "../types/pensioner";
+import type { PensionerFormData } from "../types/pensioner";
 
 const BASE_URL = "http://localhost:8000/api";
 
@@ -20,7 +21,7 @@ export async function fetchAllPensioners(): Promise<Pensioner[]> {
 }
 
 export async function createPensioner(
-  pensionerData: Partial<Pensioner>,
+  pensionerData: PensionerFormData,
 ): Promise<Pensioner> {
   const response = await fetch(`${BASE_URL}/pensioners`, {
     method: "POST",

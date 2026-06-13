@@ -9,7 +9,6 @@ export interface Pensioner {
   middle_name?: string;
   bank_name: string;
   pension_account: string;
-  amount: number;
   amount_centavos: number;
   created_at: string;
   updated_at: string;

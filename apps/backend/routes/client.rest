@@ -30,3 +30,24 @@ Content-Type: application/json
 }
 ###
 DELETE http://localhost:8000/api/employees/1
+
+###
+GET http://localhost:8000/api/pensioners
+###
+POST http://localhost:8000/api/pensioners
+Content-Type: application/json
+
+{
+    "serial_number": "PEN123456",
+    "first_name": "Jane",
+    "last_name": "Doe 1",
+    "middle_name": "dfhg",
+    "pension_account": "1234567890",
+    "rank": "PFC",
+    "bank_name": "Bank of America",
+    "amount": 1500.00,
+    "amount_centavos": 150000,
+    "retirement_date": "2020-01-01",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+}

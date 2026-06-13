@@ -31,16 +31,15 @@ class PensionerController extends Controller
         try {
             //validation
             $validatedData = $request->validate([
-                'serial_number' => 'required|string|max:100',
-                'control_number' => 'required|string|max:100',
+                'control_number' => 'required|string|max:20|unique:pensioners',
+                'serial_number' => 'required|string|max:10|unique:pensioners',
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'middle_name' => 'nullable|string|max:255',
                 'pension_account' => 'required|string|max:20',
                 'rank' => 'nullable|string|max:20',
                 'bank_name' => 'nullable|string|max:50',
-                'amount' => 'required|numeric|between:0,999999.99',
-                'amount_centavos' => 'required|integer|between:0,99',
+                'amount_centavos' => 'required|integer|min:0',
                 'retirement_date' => 'required|date'
             ]);
 
@@ -81,16 +80,15 @@ class PensionerController extends Controller
 
             //validation
             $validatedData = $request->validate([
-                'serial_number' => 'required|string|max:100',
-                'control_number' => 'required|string|max:100',
+                'control_number' => 'required|string|max:20|unique:pensioners',
+                'serial_number' => 'required|string|max:10|unique:pensioners',
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'middle_name' => 'nullable|string|max:255',
                 'pension_account' => 'required|string|max:20',
                 'rank' => 'nullable|string|max:20',
                 'bank_name' => 'nullable|string|max:50',
-                'amount' => 'required|numeric|between:0,999999.99',
-                'amount_centavos' => 'required|integer|between:0,99',
+                'amount_centavos' => 'required|integer|min:0',
                 'retirement_date' => 'required|date'
             ]);
 

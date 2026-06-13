@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pensioner', function (Blueprint $table) {
+        Schema::create('pensioners', function (Blueprint $table) {
             $table->id();
             $table->string('serial_number', 10)->unique();
             $table->string('control_number', 20)->unique();
@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('pension_account', 20);
             $table->string('rank', 20)->nullable();
             $table->string('bank_name', 50);
-            $table->decimal('amount', 10, 2);
             $table->bigInteger('amount_centavos');
             $table->date('retirement_date');
             $table->timestamps();
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pensioner');
+        Schema::dropIfExists('pensioners');
     }
 };

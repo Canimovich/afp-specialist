@@ -19,15 +19,12 @@ function PensionersForm({ loadPensioners }: { loadPensioners: () => void }) {
       last_name: event.currentTarget.last_name.value.toString().trim(),
       first_name: event.currentTarget.first_name.value.toString().trim(),
       middle_name: event.currentTarget.middle_name.value.toString().trim(),
+      bank_name: event.currentTarget.bank_name.value.toString().trim(),
       pension_account: event.currentTarget.pension_account.value
         .toString()
         .trim(),
       rank: event.currentTarget.rank.value.toString().trim(),
-      bank_name: event.currentTarget.bank_name.value.toString().trim(),
-      amount: Number(event.currentTarget.amount.value),
-      amount_centavos: Number(
-        event.currentTarget.amount_centavos.value.toString().trim(),
-      ),
+      amount_centavos: Number(event.currentTarget.amount_centavos.value),
       retirement_date: event.currentTarget.retirement_date.value.toString(),
     };
 
@@ -60,8 +57,25 @@ function PensionersForm({ loadPensioners }: { loadPensioners: () => void }) {
         </div>
 
         <div>
+          <label htmlFor="control_number">Control Nr:</label>
+          <input
+            id="control_number"
+            name="control_number"
+            required
+            type="text"
+            maxLength={20}
+          />
+        </div>
+
+        <div>
           <label htmlFor="serial_number">Serial Nr:</label>
-          <input id="serial_number" name="serial_number" required type="text" />
+          <input
+            id="serial_number"
+            name="serial_number"
+            required
+            type="text"
+            maxLength={10}
+          />
         </div>
 
         <div>
@@ -88,16 +102,6 @@ function PensionersForm({ loadPensioners }: { loadPensioners: () => void }) {
             <option value="Lieutenant General">LGEN</option>
             <option value="General">GEN</option>
           </select>
-        </div>
-
-        <div>
-          <label htmlFor="control_number">Control Nr:</label>
-          <input
-            id="control_number"
-            name="control_number"
-            required
-            type="text"
-          />
         </div>
 
         <div>
@@ -131,12 +135,7 @@ function PensionersForm({ loadPensioners }: { loadPensioners: () => void }) {
         </div>
 
         <div>
-          <label htmlFor="amount">Pension Amount:</label>
-          <input id="amount" name="amount" required type="number" />
-        </div>
-
-        <div>
-          <label htmlFor="amount_centavos">Pension Amount Centavos:</label>
+          <label htmlFor="amount_centavos">Pension Amount:</label>
           <input
             id="amount_centavos"
             name="amount_centavos"

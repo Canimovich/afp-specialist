@@ -6,18 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pensioner extends Model
 {
-    protected $table = 'pensioner';   //optional
+    protected $table = 'pensioners';   //optional
 
     protected $fillable = [
-        'serial_number',
         'control_number',
+        'serial_number',
         'first_name',
         'last_name',
         'middle_name',
         'pension_account',
         'rank',
         'bank_name',
-        'amount',
         'amount_centavos',
         'retirement_date'
     ];

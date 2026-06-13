@@ -6,19 +6,25 @@ import type { Employee } from "./types/employee";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import CreatePensioner from "./pages/CreatePensioner";
+import PensionersTable from "./components/PensionersTable.tsx";
+import { fetchAllPensioners } from "./services/pensionerService";
+import type { Pensioner } from "./types/pensioner";
 
 function App() {
   //props -> properties, parameter pipasan
   const [employees, setEmployees] = useState([] as Employee[]);
 
+  const [pensioners, setPensioners] = useState([] as Pensioner[]);
+
+  const fetchData = async () => {
+    const employeeData = await fetchAllEmployees();
+    setEmployees(employeeData);
+    const pensionerData = await fetchAllPensioners();
+    setPensioners(pensionerData);
+  };
+
   useEffect(() => {
-    fetchAllEmployees()
-      .then((data) => {
-        setEmployees(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    fetchData();
   }, []); //fetch data on component mount
 
   return (
@@ -27,6 +33,10 @@ function App() {
         <Routes>
           <Route path="/" element={<EmployeeTable employees={employees} />} />
           <Route path="/employee/create" element={<CreateEmployee />} />
+          <Route
+            path="/pensioner"
+            element={<PensionersTable pensioners={pensioners} />}
+          />
           <Route path="/pensioner/create" element={<CreatePensioner />} />
         </Routes>
       </BrowserRouter>
