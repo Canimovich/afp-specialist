@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('pensioner', function (Blueprint $table) {
+            $table->id();
+            $table->string('serial_number', 10)->unique();
+            $table->string('control_number', 20)->unique();
+            $table->string('first_name', 255);
+            $table->string('last_name', 255);
+            $table->string('middle_name', 255)->nullable();
+            $table->string('pension_account', 20);
+            $table->string('rank', 20)->nullable();
+            $table->string('bank_name', 50);
+            $table->decimal('amount', 10, 2);
+            $table->bigInteger('amount_centavos');
+            $table->date('retirement_date');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('pensioner');
+    }
+};
